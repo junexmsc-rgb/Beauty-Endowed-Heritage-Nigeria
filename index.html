@@ -3,97 +3,565 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beauty Endowed Heritage | Premium Spa & Makeup Academy in Ketu, Lagos</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <title>Beauty Endowed Heritage | Premium Spa & Makeup Academy Lagos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* =========================================
+           AGGRESSIVE LUXURY BRANDING CSS
+           ========================================= */
+        :root {
+            --gold: #D4AF37;
+            --gold-light: #F3E5AB;
+            --dark: #0a0a0a;
+            --darker: #050505;
+            --gray: #1a1a1a;
+            --text: #ffffff;
+            --text-muted: #a0a0a0;
+            --wa-green: #25D366;
+        }
+        
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+        
+        body { 
+            font-family: 'Lato', sans-serif; 
+            background: var(--dark); 
+            color: var(--text); 
+            overflow-x: hidden; 
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4,.serif { 
+            font-family: 'Playfair Display', serif; 
+        }
+
+        /* Glassmorphism Navigation */
+        nav { 
+            position: fixed; 
+            width: 100%; 
+            padding: 20px 5%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            background: rgba(10, 10, 10, 0.85); 
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 1000; 
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15); 
+        }
+        
+       .logo { 
+            font-size: 1.6rem; 
+            color: var(--gold); 
+            font-weight: 700; 
+            letter-spacing: 3px; 
+            text-transform: uppercase; 
+        }
+        
+       .nav-links a { 
+            color: var(--text); 
+            text-decoration: none; 
+            margin-left: 35px; 
+            font-size: 0.85rem; 
+            letter-spacing: 1.5px; 
+            text-transform: uppercase;
+            transition: color 0.3s ease; 
+        }
+        
+       .nav-links a:hover { 
+            color: var(--gold); 
+        }
+
+        /* Cinematic Hero Section */
+       .hero { 
+            height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center; 
+            background: linear-gradient(to bottom, rgba(5, 5, 5, 0.5), var(--dark)), url('https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat; 
+        }
+        
+       .hero-content { 
+            max-width: 900px; 
+            padding: 0 20px; 
+            animation: fadeUp 1.5s ease; 
+        }
+        
+       .badge { 
+            color: var(--gold); 
+            border: 1px solid var(--gold); 
+            padding: 8px 24px; 
+            border-radius: 30px; 
+            font-size: 0.75rem; 
+            letter-spacing: 4px; 
+            text-transform: uppercase; 
+            margin-bottom: 30px; 
+            display: inline-block; 
+        }
+        
+       .hero h1 { 
+            font-size: 5rem; 
+            line-height: 1.1; 
+            margin-bottom: 25px; 
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        
+       .hero h1 span { 
+            color: var(--gold); 
+            font-style: italic; 
+        }
+        
+       .hero p { 
+            font-size: 1.2rem; 
+            color: #d1d1d1; 
+            margin-bottom: 40px; 
+            font-weight: 300; 
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Call To Action Buttons */
+       .btn { 
+            padding: 16px 40px; 
+            font-size: 0.9rem; 
+            border: none; 
+            cursor: pointer; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            transition: all 0.4s ease; 
+            text-decoration: none; 
+            display: inline-block; 
+            border-radius: 2px;
+        }
+        
+       .btn-gold { 
+            background: var(--gold); 
+            color: var(--darker); 
+            font-weight: 700; 
+        }
+        
+       .btn-gold:hover { 
+            background: var(--gold-light); 
+            transform: translateY(-4px); 
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.2); 
+        }
+        
+       .btn-outline { 
+            background: transparent; 
+            color: var(--gold); 
+            border: 1px solid var(--gold); 
+            margin-left: 20px; 
+        }
+        
+       .btn-outline:hover { 
+            background: var(--gold); 
+            color: var(--darker); 
+        }
+
+        /* Precision Services Grid */
+       .services { 
+            padding: 120px 5%; 
+            background: var(--darker); 
+        }
+        
+       .section-title { 
+            text-align: center; 
+            margin-bottom: 80px; 
+        }
+        
+       .section-title h2 { 
+            font-size: 3.5rem; 
+            color: var(--gold); 
+            margin-bottom: 15px; 
+        }
+        
+       .section-title p { 
+            color: var(--text-muted); 
+            font-size: 1.1rem; 
+            letter-spacing: 1px;
+        }
+        
+       .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 30px; 
+        }
+        
+       .card { 
+            background: var(--gray); 
+            padding: 50px 40px; 
+            transition: transform 0.5s ease, background 0.5s ease; 
+            position: relative; 
+            overflow: hidden; 
+            border: 1px solid rgba(255,255,255,0.02);
+        }
+        
+       .card::before { 
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 3px; 
+            background: var(--gold); 
+            transform: scaleX(0); 
+            transform-origin: left; 
+            transition: transform 0.5s ease; 
+        }
+        
+       .card:hover { 
+            transform: translateY(-10px); 
+            background: #222; 
+        }
+        
+       .card:hover::before { 
+            transform: scaleX(1); 
+        }
+        
+       .card h3 { 
+            font-size: 1.8rem; 
+            margin-bottom: 25px; 
+            color: var(--gold); 
+        }
+        
+       .card ul { 
+            list-style: none; 
+            margin-bottom: 40px; 
+            min-height: 130px;
+        }
+        
+       .card ul li { 
+            color: var(--text-muted); 
+            margin-bottom: 12px; 
+            font-size: 0.95rem; 
+            display: flex; 
+            align-items: center; 
+        }
+        
+       .card ul li::before { 
+            content: '✦'; 
+            color: var(--gold); 
+            margin-right: 12px; 
+            font-size: 0.7rem; 
+        }
+        
+       .card-btn { 
+            width: 100%; 
+            padding: 15px; 
+            background: transparent; 
+            border: 1px solid var(--gold); 
+            color: var(--gold); 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            font-size: 0.8rem; 
+            font-weight: 700;
+        }
+        
+       .card-btn:hover { 
+            background: var(--gold); 
+            color: var(--darker); 
+        }
+
+        /* The Academy Section */
+       .academy { 
+            padding: 120px 5%; 
+            display: flex; 
+            align-items: center; 
+            gap: 80px; 
+            background: var(--dark); 
+        }
+        
+       .academy-text { 
+            flex: 1; 
+        }
+        
+       .academy-text h2 { 
+            font-size: 3.5rem; 
+            color: var(--gold); 
+            margin-bottom: 30px; 
+            line-height: 1.1;
+        }
+        
+       .academy-text blockquote { 
+            font-size: 1.8rem; 
+            font-family: 'Playfair Display', serif;
+            font-style: italic; 
+            color: var(--text); 
+            border-left: 3px solid var(--gold); 
+            padding-left: 25px; 
+            margin-bottom: 30px; 
+            line-height: 1.5; 
+        }
+        
+       .academy-text p { 
+            color: var(--text-muted); 
+            font-size: 1.1rem; 
+            line-height: 1.8; 
+            margin-bottom: 40px; 
+        }
+        
+       .academy-img { 
+            flex: 1; 
+            min-height: 600px; 
+            background: url('https://images.unsplash.com/photo-1516975080661-46b0851147ce?q=80&w=2069&auto=format&fit=crop') center/cover; 
+            position: relative;
+        }
+        
+       .academy-img::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--gold);
+            z-index: -1;
+        }
+
+        /* Deep Footer / Contact Data */
+       .footer { 
+            padding: 100px 5% 40px; 
+            background: var(--darker); 
+            text-align: center; 
+            border-top: 1px solid #1a1a1a; 
+        }
+        
+       .footer h2 { 
+            color: var(--gold); 
+            font-size: 3rem; 
+            margin-bottom: 60px; 
+        }
+        
+       .contact-grid { 
+            display: flex; 
+            justify-content: center; 
+            gap: 80px; 
+            margin-bottom: 80px; 
+            flex-wrap: wrap; 
+        }
+        
+       .contact-item { 
+            color: var(--text-muted); 
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+       .contact-item span { 
+            display: block; 
+            color: var(--gold); 
+            font-family: 'Playfair Display', serif; 
+            font-size: 1.5rem; 
+            margin-bottom: 15px; 
+        }
+        
+       .copyright { 
+            color: #444; 
+            font-size: 0.9rem; 
+            border-top: 1px solid #1a1a1a; 
+            padding-top: 30px; 
+            letter-spacing: 1px;
+        }
+
+        /* Aggressive WhatsApp Conversion Widget */
+       .wa-float { 
+            position: fixed; 
+            bottom: 40px; 
+            right: 40px; 
+            background: var(--wa-green); 
+            color: #fff; 
+            width: 65px; 
+            height: 65px; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4); 
+            z-index: 1000; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+        }
+        
+       .wa-float::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid var(--wa-green);
+            animation: pulseRing 2s infinite;
+        }
+        
+       .wa-float:hover { 
+            transform: translateY(-5px); 
+            background: #1ebe55;
+        }
+        
+       .wa-float svg { 
+            width: 38px; 
+            height: 38px; 
+            fill: currentColor; 
+        }
+
+        /* Animations & Media Queries */
+        @keyframes fadeUp { 
+            from { opacity: 0; transform: translateY(30px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        
+        @keyframes pulseRing {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+        
+        @media(max-width: 900px) {
+           .hero h1 { font-size: 3.5rem; }
+           .academy { flex-direction: column; gap: 60px; padding: 80px 5%; }
+           .academy-img { width: 100%; min-height: 400px; }
+           .nav-links { display: none; }
+           .btn-outline { margin-left: 0; margin-top: 20px; display: block; }
+           .contact-grid { gap: 40px; flex-direction: column; }
+        }
+    </style>
 </head>
 <body>
-    <div class="preloader" id="preloader">
-        <div class="brand-mark">BEH</div>
-    </div>
 
-    <nav class="glass-nav">
-        <div class="nav-brand">Beauty Endowed Heritage</div>
-        <div class="nav-contact">
-            <span>45 Demurin Rd, Ketu</span>
-            <a href="https://wa.me/2348034415260" class="nav-wa-link" target="_blank">+234 803 441 5260</a>
+    <nav>
+        <div class="logo">BEH.</div>
+        <div class="nav-links">
+            <a href="#services">The Spa</a>
+            <a href="#academy">The Academy</a>
+            <a href="#contact">Locate Us</a>
         </div>
     </nav>
 
-    <header class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-content fade-up">
-            <div class="badge">Masterclass Artistry & Premium Spa</div>
+    <section class="hero">
+        <div class="hero-content">
+            <div class="badge">Ketu's Premier Sanctuary</div>
             <h1>A Day With Us Is<br><span>Never A Waste.</span></h1>
-            <p>Elevate your beauty and wellness with our specialized treatments and professional academy in the heart of Ketu, Lagos.</p>
-            <div class="cta-group">
-                <button class="btn-primary wa-trigger" data-service="Premium Spa Session">Book Your Sanctuary</button>
-                <button class="btn-secondary wa-trigger" data-service="Makeup & Gele Academy">Join The Academy</button>
-            </div>
+            <p>Elevate your wellness with exclusive spa therapies and masterclass makeup artistry tailored for the modern, elegant woman.</p>
+            <a href="#" class="btn btn-gold wa-link" data-msg="Hello Beauty Endowed Heritage. I am reaching out from your new website. I would like to book a VIP Spa Session.">Reserve Your Experience</a>
+            <a href="#academy" class="btn btn-outline">Explore The Academy</a>
         </div>
-    </header>
+    </section>
 
-    <section class="services-section">
-        <div class="section-header fade-up">
+    <section class="services" id="services">
+        <div class="section-title">
             <h2>Bespoke Treatments</h2>
-            <p>Tailored aesthetic and therapeutic mastery.</p>
+            <p>Precision aesthetics and therapeutic mastery.</p>
         </div>
         
-        <div class="services-grid">
-            <div class="service-card fade-up">
-                <div class="card-image bg-facial"></div>
-                <div class="card-content">
-                    <h3>Advanced Facials</h3>
-                    <p>Microdermabrasion, Gold Treatment, LED, and Ultrasonic Facials for a flawless, glowing complexion.</p>
-                    <button class="btn-outline wa-trigger" data-service="Advanced Facial Treatment">Consult Specialist</button>
-                </div>
+        <div class="grid">
+            <div class="card">
+                <h3>Advanced Skin Facials</h3>
+                <ul>
+                    <li>Microdermabrasion Therapy</li>
+                    <li>24k Gold Facial Treatment</li>
+                    <li>LED & Ultrasonic Facials</li>
+                    <li>Organic & Acne Reduction</li>
+                </ul>
+                <button class="card-btn wa-link" data-msg="Hello! I am highly interested in booking an Advanced Skin Facial at the Ketu studio.">Consult Specialist</button>
             </div>
-
-            <div class="service-card fade-up" style="transition-delay: 0.1s;">
-                <div class="card-image bg-massage"></div>
-                <div class="card-content">
-                    <h3>Therapeutic Massage</h3>
-                    <p>Relieve tension with our Deep Tissue, Hot Stone, Swedish, and specialized Prenatal Massages.</p>
-                    <button class="btn-outline wa-trigger" data-service="Therapeutic Massage">Reserve a Room</button>
-                </div>
+            
+            <div class="card">
+                <h3>Therapeutic Massages</h3>
+                <ul>
+                    <li>Deep Tissue Muscle Relief</li>
+                    <li>Hot Stone Therapy</li>
+                    <li>Swedish Relaxation Massage</li>
+                    <li>Specialized Prenatal Massage</li>
+                </ul>
+                <button class="card-btn wa-link" data-msg="Hello! I would like to check your availability to schedule a Therapeutic Massage.">Reserve A Room</button>
             </div>
-
-            <div class="service-card fade-up" style="transition-delay: 0.2s;">
-                <div class="card-image bg-bath"></div>
-                <div class="card-content">
-                    <h3>Moroccan & Steam Baths</h3>
-                    <p>Authentic Moroccan Baths, Hydrotherapy, and full Body Exfoliation & Toning Body Wraps.</p>
-                    <button class="btn-outline wa-trigger" data-service="Moroccan Bath">Book Treatment</button>
-                </div>
+            
+            <div class="card">
+                <h3>Body Therapy & Baths</h3>
+                <ul>
+                    <li>Authentic Moroccan Bath</li>
+                    <li>Steam Bath & Hydrotherapy</li>
+                    <li>Full Body Exfoliation</li>
+                    <li>Toning Body Wraps</li>
+                </ul>
+                <button class="card-btn wa-link" data-msg="Hello! I want to book a Moroccan Bath and Body Therapy session. What are your rates?">Book Treatment</button>
             </div>
-
-            <div class="service-card fade-up" style="transition-delay: 0.3s;">
-                <div class="card-image bg-correction"></div>
-                <div class="card-content">
-                    <h3>Targeted Corrections</h3>
-                    <p>Expert treatments for Stretch Marks, Sunburn, Skin Tags, Dark Knuckles, and Spider Veins.</p>
-                    <button class="btn-outline wa-trigger" data-service="Skin Correction Consultation">Request Consultation</button>
-                </div>
+            
+            <div class="card">
+                <h3>Targeted Corrections</h3>
+                <ul>
+                    <li>Stretch Mark Treatment</li>
+                    <li>Sunburn & Skin Tag Removal</li>
+                    <li>Dark Knuckles Correction</li>
+                    <li>Spider & Varicose Vein Therapy</li>
+                </ul>
+                <button class="card-btn wa-link" data-msg="Hello! I need a private consultation for your Targeted Skin Correction services.">Request Consultation</button>
             </div>
         </div>
     </section>
 
-    <section class="manifesto-section fade-up">
-        <div class="manifesto-glass">
-            <h2>The Academy</h2>
+    <section class="academy" id="academy">
+        <div class="academy-img"></div>
+        <div class="academy-text">
+            <h2>The Masterclass Academy</h2>
             <blockquote>"We give our students the best. We train them to be unique & creative."</blockquote>
-            <p>Master the art of Professional Makeup and Gele tying with industry experts at our dedicated Ketu studio.</p>
-            <button class="btn-primary wa-trigger mt-4" data-service="Academy Enrollment Info">Enroll Today</button>
+            <p>Beyond our luxury spa services, we operate Ketu's premier academy for aspiring beauty creatives. Learn professional makeup artistry and Gele tying directly from industry experts. We equip you with the skills, tools, and visual aesthetics required to launch your own highly successful beauty enterprise in Lagos.</p>
+            <a href="#" class="btn btn-gold wa-link" data-msg="Hello! I am ready to elevate my craft. I would like to request enrollment details and pricing for the Makeup & Gele Training Academy.">Enroll Today</a>
         </div>
     </section>
 
-    <div class="floating-conversion wa-trigger" data-service="General Inquiry">
-        <div class="pulse-ring"></div>
-        <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564c.173.087.289.129.332.202.043.073.043.423-.101.827z"/></svg>
-        <span>VIP Priority Chat</span>
+    <footer class="footer" id="contact">
+        <h2>Visit Our Sanctuary</h2>
+        <div class="contact-grid">
+            <div class="contact-item">
+                <span>Address</span>
+                45 Demurin Rd, Opp Herbinco Pharmacy<br>Ketu, Lagos
+            </div>
+            <div class="contact-item">
+                <span>Direct Lines</span>
+                +234 803 441 5260<br>+234 809 883 1617
+            </div>
+            <div class="contact-item">
+                <span>Opening Hours</span>
+                Mon - Sat: 9:00 AM - 7:00 PM<br>Sun: Strict Appointment Only
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 Beauty Endowed Heritage Nigeria. All Rights Reserved.
+        </div>
+    </footer>
+
+    <div class="wa-float wa-link" data-msg="Hello Beauty Endowed Heritage! I am reaching out from your website to make a general inquiry.">
+        <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564c.173.087.289.129.332.202.043.073.043.423-.101.827z"/></svg>
     </div>
 
-    <script src="app.js"></script>
+    <script>
+        // Official WhatsApp Business Line
+        const officialPhone = "2348034415260"; 
+        
+        // Instant API Conversion Routing
+        document.querySelectorAll('.wa-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const rawMsg = link.getAttribute('data-msg');
+                const encodedMsg = encodeURIComponent(rawMsg);
+                window.open(`https://wa.me/${officialPhone}?text=${encodedMsg}`, '_blank');
+            });
+        });
+
+        // Smooth Scroll for Navigation
+        document.querySelectorAll('.nav-links a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
-
