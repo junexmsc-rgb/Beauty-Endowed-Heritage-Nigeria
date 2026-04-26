@@ -3,318 +3,1110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beauty Endowed Heritage | Premium Spa & Masterclass Academy</title>
+    <title>Beauty Endowed Heritage | Premium Spa & Clinical Aesthetics Lagos</title>
+    <meta name="description" content="Lagos' Premier Sanctuary for Skin Transformation, Advanced Facials, and Professional Beauty Mastery.">
     
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <style>
-        /* =========================================
-           $30,000 LUXURY UI/UX ARCHITECTURE (BENTO GRID + GSAP)
-           ========================================= */
+        /* ==========================================================================
+           1. CSS VARIABLES & RESET
+           ========================================================================== */
         :root {
-            --bg-deep: #050505;
-            --surface-dark: #121212;
-            --brand-gold: #D4AF37;
-            --text-main: #ffffff;
-            --text-muted: #a0a0a0;
-            --whatsapp: #25D366;
-            --glass-bg: rgba(10, 10, 10, 0.7);
-            --glass-border: rgba(212, 175, 55, 0.15);
+            --bg-dark: #0a0a0a;
+            --bg-surface: #141414;
+            --bg-glass: rgba(255, 255, 255, 0.03);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --gold-primary: #C5A059;
+            --gold-light: #E6C887;
+            --gold-dark: #8A6D3B;
+            --text-main: #F9F7F2;
+            --text-muted: #A1A1AA;
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Inter', sans-serif;
+            --spacing-section: 120px;
+            --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
 
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg-deep);
+            background-color: var(--bg-dark);
             color: var(--text-main);
-            overflow-x: hidden;
+            font-family: var(--font-sans);
             line-height: 1.6;
+            overflow-x: hidden;
+            cursor: none; /* Custom cursor implementation */
         }
 
-        h1, h2, h3,.serif { font-family: 'Cinzel', serif; }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-serif);
+            font-weight: 400;
+            line-height: 1.1;
+        }
 
-        /* Smooth Preloader */
-       .loader {
-            position: fixed; inset: 0;
-            background: var(--bg-deep);
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        /* ==========================================================================
+           2. CUSTOM CURSOR (UI/UX Elevation)
+           ========================================================================== */
+        .custom-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--gold-primary);
+            border-radius: 50%;
+            pointer-events: none;
+            mix-blend-mode: difference;
             z-index: 9999;
-            display: flex; justify-content: center; align-items: center;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background 0.3s;
         }
-       .loader-text {
-            font-family: 'Cinzel', serif; font-size: 2.5rem; color: var(--brand-gold);
-            letter-spacing: 8px; animation: pulse 2s infinite ease-in-out;
-        }
-        @keyframes pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; text-shadow: 0 0 20px rgba(212, 175, 55, 0.4); } }
 
-        /* Glassmorphism Navigation */
-        nav {
-            position: fixed; top: 0; width: 100%; padding: 20px 5%;
-            display: flex; justify-content: space-between; align-items: center;
-            background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--glass-border); z-index: 1000;
+        .custom-cursor.active {
+            width: 60px;
+            height: 60px;
+            background: rgba(197, 160, 89, 0.2);
+            border: 1px solid var(--gold-primary);
+            mix-blend-mode: normal;
         }
-       .logo { font-size: 1.5rem; color: var(--brand-gold); font-weight: 700; letter-spacing: 3px; }
-       .nav-book {
-            padding: 12px 28px; background: transparent; border: 1px solid var(--brand-gold);
-            color: var(--brand-gold); border-radius: 2px; text-decoration: none; font-size: 0.85rem;
-            letter-spacing: 2px; text-transform: uppercase; transition: all 0.4s ease;
-        }
-       .nav-book:hover { background: var(--brand-gold); color: var(--bg-deep); }
 
-        /* Cinematic Hero */
-       .hero {
-            height: 100vh; position: relative;
-            display: flex; align-items: center; justify-content: center; text-align: center;
+        /* ==========================================================================
+           3. NAVIGATION
+           ========================================================================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 24px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: var(--transition-smooth);
+            border-bottom: 1px solid transparent;
         }
-       .hero-video-bg {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(5,5,5,0.4), var(--bg-deep)), url('https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?q=80&w=2070&auto=format&fit=crop') center/cover;
-            z-index: -1; transform: scale(1.1);
-        }
-       .hero-content { max-width: 900px; padding: 0 20px; z-index: 1; opacity: 0; }
-       .hero-subtitle { color: var(--brand-gold); letter-spacing: 5px; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 25px; display: block; }
-       .hero h1 { font-size: 5rem; line-height: 1.1; margin-bottom: 25px; font-weight: 400; }
-       .hero h1 span { font-style: italic; color: var(--brand-gold); }
-       .hero p { font-size: 1.2rem; color: #ccc; max-width: 600px; margin: 0 auto 40px auto; font-weight: 300; }
 
-       .btn-primary {
-            background: var(--brand-gold); color: var(--bg-deep); padding: 18px 45px;
-            font-size: 0.9rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
-            border: none; cursor: pointer; transition: all 0.4s ease; text-decoration: none; display: inline-block;
+        .navbar.scrolled {
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-glass);
+            padding: 16px 5%;
         }
-       .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3); }
 
-        /* The Manifesto */
-       .manifesto { padding: 120px 5%; text-align: center; }
-       .manifesto blockquote { font-size: 3rem; line-height: 1.3; max-width: 1000px; margin: 0 auto; color: var(--text-main); }
-       .manifesto blockquote span { color: var(--brand-gold); font-style: italic; }
-       .manifesto p { color: var(--text-muted); margin-top: 30px; font-size: 1.2rem; max-width: 800px; margin-inline: auto; }
-
-        /* Bento Grid Services */
-       .portfolio-bento { padding: 80px 5% 150px; }
-       .section-header { margin-bottom: 60px; }
-       .section-header h2 { font-size: 3rem; color: var(--brand-gold); margin-bottom: 15px; }
-       .section-header p { color: var(--text-muted); font-size: 1.1rem; }
-
-       .bento-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 320px; gap: 20px; }
-       .bento-item {
-            position: relative; border-radius: 12px; overflow: hidden;
-            background: var(--surface-dark); border: 1px solid rgba(255,255,255,0.05);
-            cursor: pointer; opacity: 0; /* Hidden for GSAP */
-        }
-       .bento-bg {
-            position: absolute; inset: 0; background-size: cover; background-position: center;
-            transition: transform 0.8s ease, filter 0.8s ease; filter: brightness(0.5);
-        }
-       .bento-item:hover.bento-bg { transform: scale(1.05); filter: brightness(0.3); }
-       .bento-item:hover { border-color: var(--brand-gold); }
-        
-       .bento-content {
-            position: absolute; bottom: 0; left: 0; width: 100%; padding: 30px;
-            background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
-        }
-       .bento-content h3 { font-size: 1.6rem; color: #fff; margin-bottom: 8px; }
-       .bento-content p { font-size: 0.9rem; color: #ccc; opacity: 0.8; transition: opacity 0.4s ease; }
-       .bento-item:hover.bento-content p { opacity: 1; color: var(--brand-gold); }
-
-       .span-2-col { grid-column: span 2; }
-       .span-2-row { grid-row: span 2; }
-
-        /* Location & Footer */
-       .location-section {
-            padding: 100px 5%; background: var(--surface-dark);
-            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 40px;
-            border-top: 1px solid var(--glass-border); opacity: 0;
-        }
-       .info-block { margin-bottom: 25px; }
-       .info-block h4 { color: var(--text-muted); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; }
-       .info-block p { font-size: 1.2rem; color: var(--text-main); }
-        
-       .footer-bottom { 
-            text-align: center; padding: 40px; background: var(--bg-deep); 
-            color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid #111;
+        .nav-brand {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 600;
             letter-spacing: 1px;
-        }
-       .junestudio-sig {
-            display: block; margin-top: 15px; font-family: 'Cinzel', serif; 
-            color: var(--brand-gold); font-size: 1.1rem; letter-spacing: 2px; opacity: 0.8;
+            color: var(--gold-primary);
+            text-transform: uppercase;
         }
 
-        /* WhatsApp FAB */
-       .wa-float {
-            position: fixed; bottom: 40px; right: 40px; background: var(--whatsapp); color: #fff;
-            width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3); z-index: 1000; cursor: pointer; transition: transform 0.3s;
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            align-items: center;
         }
-       .wa-float:hover { transform: translateY(-5px) scale(1.05); }
-       .wa-float svg { width: 35px; height: 35px; fill: currentColor; }
 
+        .nav-item {
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            padding-bottom: 4px;
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--gold-primary);
+            transform: translateX(-101%);
+            transition: transform 0.4s ease;
+        }
+
+        .nav-item:hover::after {
+            transform: translateX(0);
+        }
+
+        .nav-cta {
+            padding: 12px 28px;
+            background: transparent;
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-primary);
+            border-radius: 30px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .nav-cta::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--gold-primary);
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .nav-cta:hover {
+            color: var(--bg-dark);
+        }
+
+        .nav-cta:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-main);
+            cursor: pointer;
+        }
+
+        .menu-toggle svg {
+            width: 32px;
+            height: 32px;
+            fill: currentColor;
+        }
+
+        /* ==========================================================================
+           4. HERO SECTION (High-Fidelity Parallax)
+           ========================================================================== */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 120%;
+            background: url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
+            z-index: -2;
+            will-change: transform;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.9) 100%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            max-width: 900px;
+            padding: 0 5%;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--gold-light);
+            margin-bottom: 20px;
+            display: block;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .hero-title {
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            color: var(--text-main);
+            margin-bottom: 30px;
+        }
+
+        .hero-title .italic {
+            font-style: italic;
+            font-weight: 300;
+            color: var(--gold-primary);
+        }
+
+        .hero-desc {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 50px auto;
+            opacity: 0;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            opacity: 0;
+        }
+
+        .btn-primary {
+            padding: 18px 40px;
+            background: var(--gold-primary);
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(197, 160, 89, 0.3);
+        }
+
+        .btn-secondary {
+            padding: 18px 40px;
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-glass);
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            transition: var(--transition-smooth);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--gold-primary);
+            background: rgba(197, 160, 89, 0.1);
+        }
+
+        /* ==========================================================================
+           5. ABOUT & PHILOSOPHY (Storytelling)
+           ========================================================================== */
+        .philosophy {
+            padding: var(--spacing-section) 5%;
+            background: var(--bg-dark);
+            position: relative;
+        }
+
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .phil-image-wrap {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 4/5;
+        }
+
+        .phil-image-wrap img {
+            width: 100%;
+            height: 100%;
+            transition: transform 1.5s ease;
+        }
+
+        .phil-image-wrap:hover img {
+            transform: scale(1.05);
+        }
+
+        .phil-badge {
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            width: 180px;
+            height: 180px;
+            background: var(--bg-surface);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border: 1px solid var(--border-glass);
+            padding: 20px;
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            color: var(--gold-primary);
+            z-index: 2;
+        }
+
+        .phil-content h2 {
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            margin-bottom: 30px;
+        }
+
+        .phil-content p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+            border-top: 1px solid var(--border-glass);
+            padding-top: 40px;
+        }
+
+        .stat-item h4 {
+            font-size: 3rem;
+            color: var(--gold-primary);
+            margin-bottom: 10px;
+        }
+
+        .stat-item p {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+
+        /* ==========================================================================
+           6. SERVICES BENTO GRID (Deeply Curated Graphics)
+           ========================================================================== */
+        .services {
+            padding: var(--spacing-section) 5%;
+            background: var(--bg-surface);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(3rem, 5vw, 5rem);
+            margin-bottom: 20px;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-auto-rows: 350px;
+            gap: 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .bento-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            background: var(--bg-dark);
+            border: 1px solid var(--border-glass);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            group: hover;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+        }
+
+        .bento-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+            transition: transform 0.8s ease, opacity 0.8s ease;
+            z-index: 0;
+        }
+
+        .bento-card:hover .bento-bg {
+            transform: scale(1.1);
+            opacity: 0.7;
+        }
+
+        .bento-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 60%;
+            background: linear-gradient(to top, rgba(10,10,10,0.9), transparent);
+            z-index: 1;
+        }
+
+        .bento-content {
+            position: relative;
+            z-index: 2;
+            transform: translateY(20px);
+            transition: transform 0.4s ease;
+        }
+
+        .bento-card:hover .bento-content {
+            transform: translateY(0);
+        }
+
+        .bento-content h3 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .bento-content p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            opacity: 0;
+            transition: opacity 0.4s ease 0.1s;
+        }
+
+        .bento-card:hover .bento-content p {
+            opacity: 1;
+        }
+
+        .price-tag {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 6px 12px;
+            background: rgba(197, 160, 89, 0.2);
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-light);
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            opacity: 0;
+            transition: opacity 0.4s ease 0.2s;
+        }
+
+        .bento-card:hover .price-tag {
+            opacity: 1;
+        }
+
+        /* Specific Grid Placements */
+        .card-large { grid-column: span 8; grid-row: span 2; }
+        .card-tall { grid-column: span 4; grid-row: span 2; }
+        .card-wide { grid-column: span 6; grid-row: span 1; }
+        .card-square { grid-column: span 6; grid-row: span 1; }
+
+        /* ==========================================================================
+           7. ACADEMY PITCH (The Upsell)
+           ========================================================================== */
+        .academy {
+            padding: var(--spacing-section) 5%;
+            background: var(--bg-dark);
+            text-align: center;
+            border-top: 1px solid var(--border-glass);
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .academy-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .academy-tag {
+            color: var(--gold-primary);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .academy h2 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            margin-bottom: 30px;
+        }
+
+        .academy p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+        }
+
+        .academy-features {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            color: var(--gold-light);
+        }
+
+        .feature svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--gold-primary);
+        }
+
+        /* ==========================================================================
+           8. AGGRESSIVE SALES / BOOKING CTA
+           ========================================================================== */
+        .booking-cta {
+            padding: 100px 5%;
+            background: linear-gradient(45deg, #1a150e 0%, #0a0a0a 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glow-orb {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(197, 160, 89, 0.1) 0%, transparent 70%);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .booking-cta h2 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            margin-bottom: 20px;
+            z-index: 1;
+        }
+
+        .urgent-tag {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            color: #ff4d4d;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 40px;
+            z-index: 1;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+        }
+
+        .btn-massive {
+            padding: 24px 60px;
+            font-size: 1.2rem;
+            background: var(--gold-primary);
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            z-index: 1;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-massive:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(197, 160, 89, 0.4);
+        }
+
+        /* ==========================================================================
+           9. PREMIUM FOOTER & JUNE STUDIO BRANDING
+           ========================================================================== */
+        .footer {
+            padding: 80px 5% 40px;
+            background: var(--bg-dark);
+            border-top: 1px solid var(--border-glass);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+
+        .footer-brand h3 {
+            font-size: 2rem;
+            color: var(--gold-primary);
+            margin-bottom: 20px;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            max-width: 300px;
+        }
+
+        .footer-links h4 {
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 24px;
+            color: var(--text-main);
+        }
+
+        .footer-links ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links ul li a {
+            color: var(--text-muted);
+            transition: color 0.3s ease;
+        }
+
+        .footer-links ul li a:hover {
+            color: var(--gold-primary);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 40px;
+            border-top: 1px solid var(--border-glass);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .copyright {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* The Aggressive Junestudio Brand Signature */
+        .junestudio-signature {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .junestudio-mark {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #d4af37, #f3e5ab, #d4af37, #b8860b);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1.5px;
+            text-shadow: 0px 4px 15px rgba(212, 175, 55, 0.3);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-block;
+            cursor: pointer;
+            animation: gradientShift 6s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .junestudio-mark:hover {
+            transform: scale(1.1) skewX(-8deg);
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.6));
+        }
+
+        /* ==========================================================================
+           10. RESPONSIVE DESIGN (Mobile & Tablet)
+           ========================================================================== */
         @media (max-width: 1024px) {
-           .hero h1 { font-size: 4rem; }
-           .bento-grid { grid-template-columns: repeat(2, 1fr); }
-           .span-2-row { grid-row: span 1; }
+            .bento-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-auto-rows: 300px;
+            }
+            .card-large, .card-tall, .card-wide, .card-square {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+            .card-large { grid-row: span 2; }
+            .philosophy-grid { grid-template-columns: 1fr; gap: 40px; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
         }
+
         @media (max-width: 768px) {
-           .hero h1 { font-size: 3rem; }
-           .manifesto blockquote { font-size: 2rem; }
-           .bento-grid { grid-template-columns: 1fr; grid-auto-rows: 280px; }
-           .span-2-col { grid-column: span 1; }
-           .wa-float { width: 55px; height: 55px; bottom: 20px; right: 20px; }
+            :root { --spacing-section: 80px; }
+            .nav-links {
+                position: fixed;
+                top: 0; right: -100%;
+                width: 100%; height: 100vh;
+                background: var(--bg-dark);
+                flex-direction: column;
+                justify-content: center;
+                transition: right 0.5s ease;
+            }
+            .nav-links.active { right: 0; }
+            .menu-toggle { display: block; z-index: 1001; }
+            .hero-title { font-size: 3rem; }
+            .hero-actions { flex-direction: column; }
+            .bento-grid { grid-template-columns: 1fr; }
+            .card-large, .card-tall, .card-wide, .card-square { grid-column: span 1; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .custom-cursor { display: none; } /* Disable custom cursor on mobile */
         }
     </style>
 </head>
 <body>
 
-    <div class="loader" id="loader">
-        <div class="loader-text">BEH.</div>
-    </div>
+    <div class="custom-cursor" id="cursor"></div>
 
-    <nav>
-        <div class="logo">BEH.</div>
-        <a href="#" class="nav-book wa-trigger" data-msg="Hello Beauty Endowed Heritage, I want to book a VIP session in Ketu.">Reserve a Session</a>
+    <nav class="navbar" id="navbar">
+        <div class="nav-brand">Endowed.</div>
+        <button class="menu-toggle" id="mobile-menu-btn">
+            <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+        </button>
+        <div class="nav-links" id="nav-links">
+            <a href="#philosophy" class="nav-item">Our Ethos</a>
+            <a href="#services" class="nav-item">The Treatments</a>
+            <a href="#academy" class="nav-item">Academy</a>
+            <button class="nav-cta">Reserve Session</button>
+        </div>
     </nav>
 
-    <section class="hero">
-        <div class="hero-video-bg gsap-hero-bg"></div>
-        <div class="hero-content gsap-hero-text">
-            <span class="hero-subtitle">45 Demurin Rd, Ketu, Lagos</span>
-            <h1>Science meets <span>Luxury.</span><br>Transformation is an <span>Art.</span></h1>
-            <p>Elevate your wellness with exclusive spa therapies, advanced skincare, and masterclass makeup artistry.</p>
-            <a href="#" class="btn-primary wa-trigger" data-msg="Hello! I am ready to book my sanctuary experience at the spa.">Secure Your Appointment</a>
+    <header class="hero">
+        <div class="hero-bg" id="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="hero-subtitle">Heritage meets clinical precision</span>
+            <h1 class="hero-title reveal-text">Your Reflection, <br><span class="italic">Perfected.</span></h1>
+            <p class="hero-desc">Lagos' premier sanctuary where ancient wellness therapies and modern dermatological science converge to restore your skin and soul.</p>
+            <div class="hero-actions">
+                <button class="btn-primary magnetic-btn">Secure Your Slot</button>
+                <button class="btn-secondary">Discover the Academy</button>
+            </div>
+        </div>
+    </header>
+
+    <section id="philosophy" class="philosophy">
+        <div class="philosophy-grid">
+            <div class="phil-image-wrap gs-reveal">
+                <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=2070&auto=format&fit=crop" alt="Spa Atmosphere">
+                <div class="phil-badge">
+                    Est.<br>Lagos,<br>Nigeria
+                </div>
+            </div>
+            <div class="phil-content gs-reveal-right">
+                <h2>We don't just treat skin. We restore confidence.</h2>
+                <p>At Beauty Endowed Heritage, we believe that true beauty is an intersection of deep holistic wellness and targeted clinical expertise. Situated in the heart of Lagos, we offer an escape from the city's relentless pace.</p>
+                <p>Whether you require advanced microdermabrasion for stubborn hyperpigmentation or a deeply restorative Moroccan Hammam bath, our protocols are ruthlessly effective and luxuriously delivered.</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h4>5k+</h4>
+                        <p>Radiant Clients</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>100%</h4>
+                        <p>Organic Formulations</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section class="manifesto">
-        <blockquote class="gsap-manifesto">
-            "We give our clients and students the absolute best. A day with us is <span>never a waste.</span>"
-        </blockquote>
-        <p class="gsap-manifesto">Experience specialized treatments tailored for the modern, elegant woman.</p>
-    </section>
-
-    <section class="portfolio-bento">
-        <div class="section-header gsap-header">
-            <h2>The Curated Portfolio</h2>
-            <p>Precision aesthetics and therapeutic mastery. Tap any service to instantly connect with our specialists.</p>
+    <section id="services" class="services">
+        <div class="section-header gs-reveal-up">
+            <h2>The Treatment Portfolio</h2>
+            <p>Curated experiences designed to yield visible results within 48 hours.</p>
         </div>
-
+        
         <div class="bento-grid">
-            <div class="bento-item span-2-col span-2-row gsap-bento wa-trigger" data-msg="Hello, I want to book a professional Makeup & Gele session.">
-                <div class="bento-bg" style="background-image: url('https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?q=80&w=2071&auto=format&fit=crop');"></div>
+            <div class="bento-card card-large">
+                <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?q=80&w=2070&auto=format&fit=crop" alt="Advanced Gold Facial" class="bento-bg">
                 <div class="bento-content">
-                    <h3 class="serif">The Masterclass Academy</h3>
-                    <p>Professional Makeup, flawless traditional Gele tying, and bespoke event glam.</p>
+                    <h3>24K Gold Clinical Facial</h3>
+                    <p>Our flagship treatment. Combines deep ultrasonic exfoliation with active 24K gold nano-particles to instantly reverse dullness, stimulate collagen, and leave a mirror-like glow.</p>
+                    <span class="price-tag">From ₦45,000</span>
                 </div>
             </div>
 
-            <div class="bento-item gsap-bento wa-trigger" data-msg="Hello, I am interested in your Advanced Skin Facials.">
-                <div class="bento-bg" style="background-image: url('https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070&auto=format&fit=crop');"></div>
+            <div class="bento-card card-tall">
+                <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?q=80&w=1887&auto=format&fit=crop" alt="Moroccan Steam Bath" class="bento-bg">
                 <div class="bento-content">
-                    <h3 class="serif">Advanced Facials</h3>
-                    <p>Microdermabrasion, 24k Gold, LED, and Ultrasonic treatments.</p>
+                    <h3>The Moroccan Hammam</h3>
+                    <p>Authentic black soap, vigorous kessa exfoliation, and herbal steam to shed dead skin entirely.</p>
+                    <span class="price-tag">₦35,000</span>
                 </div>
             </div>
 
-            <div class="bento-item gsap-bento wa-trigger" data-msg="Hello, I would like to reserve a Therapeutic Massage room.">
-                <div class="bento-bg" style="background-image: url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=2070&auto=format&fit=crop');"></div>
+            <div class="bento-card card-wide">
+                <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=2070&auto=format&fit=crop" alt="Massage Therapy" class="bento-bg">
                 <div class="bento-content">
-                    <h3 class="serif">Therapeutic Massage</h3>
-                    <p>Deep Tissue, Hot Stone, Swedish, and Prenatal Massages.</p>
+                    <h3>Deep Tissue Reset</h3>
+                    <p>Targeted fascial release for executives and athletes.</p>
                 </div>
             </div>
 
-            <div class="bento-item span-2-col gsap-bento wa-trigger" data-msg="Hello, I want to book a Moroccan Bath and Body Therapy session.">
-                <div class="bento-bg" style="background-image: url('https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?q=80&w=2070&auto=format&fit=crop');"></div>
+            <div class="bento-card card-square">
+                <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?q=80&w=1974&auto=format&fit=crop" alt="Clinical Products" class="bento-bg">
                 <div class="bento-content">
-                    <h3 class="serif">Baths & Body Exfoliation</h3>
-                    <p>Authentic Moroccan Baths, Steam Baths, and Toning Body Wraps.</p>
-                </div>
-            </div>
-
-            <div class="bento-item gsap-bento wa-trigger" data-msg="Hello, I need a consultation for Targeted Skin Corrections.">
-                <div class="bento-bg" style="background-image: url('https://images.unsplash.com/photo-1616394584738-fc6e612e71c9?q=80&w=2070&auto=format&fit=crop');"></div>
-                <div class="bento-content">
-                    <h3 class="serif">Targeted Corrections</h3>
-                    <p>Expert treatments for Stretch Marks, Sunburn, Skin Tags, and Dark Knuckles.</p>
+                    <h3>Chemical Peels & Tag Removal</h3>
+                    <p>Precision dermatology for flawless texture.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="location-section gsap-location">
-        <div class="location-details">
-            <h2 class="serif" style="color: var(--brand-gold); margin-bottom: 25px; font-size: 2.5rem;">Visit The Sanctuary</h2>
-            <div class="info-block">
-                <h4>Physical Studio</h4>
-                <p>45 Demurin Rd, Opp Herbinco Pharmacy<br>Ketu, Lagos</p>
+    <section id="academy" class="academy">
+        <div class="academy-container gs-reveal-up">
+            <span class="academy-tag">Beauty Endowed Academy</span>
+            <h2>Master the Business of Beauty.</h2>
+            <p>Don't just be a consumer; command the industry. Our intensive 6-week professional certification covers advanced esthetics, product formulation, and spa management.</p>
+            
+            <div class="academy-features">
+                <div class="feature">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                    Expert Mentorship
+                </div>
+                <div class="feature">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                    Hands-on Clinicals
+                </div>
+                <div class="feature">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                    Business Strategy
+                </div>
             </div>
-            <div class="info-block">
-                <h4>Direct Lines</h4>
-                <p>+234 803 441 5260 <br> +234 809 883 1617</p>
-            </div>
-        </div>
-        <div class="location-action">
-             <a href="#" class="btn-primary wa-trigger" data-msg="Hello! I am ready to book an appointment at the Ketu studio.">Start a Conversation</a>
+            
+            <button class="btn-secondary">Download 2026 Syllabus</button>
         </div>
     </section>
 
-    <footer class="footer-bottom">
-        &copy; 2026 Beauty Endowed Heritage Nigeria. All rights reserved.
-        <span class="junestudio-sig">Imagined by junestudio</span>
+    <section class="booking-cta">
+        <div class="glow-orb"></div>
+        <div class="urgent-tag">Only 4 slots available this weekend</div>
+        <h2>Your Glow Awaits.</h2>
+        <p style="color: var(--text-muted); margin-bottom: 40px; font-size: 1.2rem; max-width: 500px;">Connect directly with our lead esthetician on WhatsApp to secure your transformative session today.</p>
+        <button class="btn-massive magnetic-btn">Book via WhatsApp</button>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>Endowed.</h3>
+                <p>Elevating the standard of aesthetic wellness and professional beauty education in Lagos.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Treatments</h4>
+                <ul>
+                    <li><a href="#">Facial Therapies</a></li>
+                    <li><a href="#">Moroccan Baths</a></li>
+                    <li><a href="#">Body Massage</a></li>
+                    <li><a href="#">Clinical Procedures</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">The Academy</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Visit Us</h4>
+                <ul style="color: var(--text-muted);">
+                    <li>Ketu, Lagos State</li>
+                    <li>Nigeria</li>
+                    <li style="margin-top: 15px; color: var(--gold-primary);">+234 (0) 800 000 0000</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="copyright">
+                &copy; 2026 Beauty Endowed Heritage Nigeria. All rights reserved.
+            </div>
+            <div class="junestudio-signature">
+                Imagined by <span class="junestudio-mark">junestudio</span>
+            </div>
+        </div>
     </footer>
 
-    <div class="wa-float wa-trigger" data-msg="Hello Beauty Endowed Heritage! I am reaching out from your portfolio website to make a VIP inquiry.">
-        <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564c.173.087.289.129.332.202.043.073.043.423-.101.827z"/></svg>
-    </div>
-
     <script>
-        // Ensure GSAP plugins are registered
+        // 1. Custom Cursor Logic
+        const cursor = document.getElementById('cursor');
+        const interactiveElements = document.querySelectorAll('a, button, .bento-card');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+        });
+
+        // 2. Navbar Scroll Effect & Mobile Menu
+        const navbar = document.getElementById('navbar');
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const navLinks = document.getElementById('nav-links');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        mobileBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // 3. GSAP Animations (The $30k Motion Feel)
         gsap.registerPlugin(ScrollTrigger);
 
-        window.addEventListener('load', () => {
-            // 1. Remove Preloader
-            const loader = document.getElementById('loader');
-            gsap.to(loader, { opacity: 0, duration: 0.8, onComplete: () => loader.style.display = 'none' });
+        // Hero Sequence
+        const heroTl = gsap.timeline();
+        heroTl.to('.hero-subtitle', { y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 0.5 })
+              .fromTo('.reveal-text', { y: 100, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, ease: 'expo.out' }, "-=0.6")
+              .to('.hero-desc', { opacity: 1, y: -20, duration: 1 }, "-=0.8")
+              .to('.hero-actions', { opacity: 1, y: -20, duration: 0.8 }, "-=0.6");
 
-            // 2. Hero Animations
-            gsap.to('.gsap-hero-bg', { scale: 1, duration: 2, ease: "power2.out" });
-            gsap.to('.gsap-hero-text', { opacity: 1, y: -20, duration: 1.2, delay: 0.5, ease: "power3.out" });
+        // Hero Parallax on Scroll
+        gsap.to('#hero-bg', {
+            yPercent: 30,
+            ease: "none",
+            scrollTrigger: {
+                trigger: ".hero",
+                start: "top top",
+                end: "bottom top",
+                scrub: true
+            }
+        });
 
-            // 3. ScrollTrigger for Manifesto
-            gsap.from('.gsap-manifesto', {
-                scrollTrigger: { trigger: '.manifesto', start: "top 80%" },
-                y: 50, opacity: 0, duration: 1, stagger: 0.2, ease: "power2.out"
-            });
-
-            // 4. ScrollTrigger for Bento Grid
-            gsap.from('.gsap-header', {
-                scrollTrigger: { trigger: '.portfolio-bento', start: "top 85%" },
-                y: 30, opacity: 0, duration: 0.8
-            });
-
-            gsap.from('.gsap-bento', {
-                scrollTrigger: { trigger: '.bento-grid', start: "top 80%" },
-                y: 50, opacity: 0, duration: 0.8, stagger: 0.15, ease: "back.out(1.2)"
-            });
-
-            // 5. ScrollTrigger for Location
-            gsap.to('.gsap-location', {
-                scrollTrigger: { trigger: '.location-section', start: "top 90%" },
-                opacity: 1, duration: 1, ease: "power2.out"
+        // General Scroll Reveals
+        gsap.utils.toArray('.gs-reveal').forEach(function(elem) {
+            gsap.fromTo(elem, { y: 50, opacity: 0 }, {
+                y: 0, opacity: 1, duration: 1, ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: elem,
+                    start: "top 80%",
+                }
             });
         });
 
-        // 6. WhatsApp Routing Engine
-        const officialPhone = "2348034415260"; 
-        document.querySelectorAll('.wa-trigger').forEach(trigger => {
-            trigger.addEventListener('click', (e) => {
-                e.preventDefault();
-                const rawMsg = trigger.getAttribute('data-msg');
-                const encodedMsg = encodeURIComponent(rawMsg);
-                window.open(`https://wa.me/${officialPhone}?text=${encodedMsg}`, '_blank');
+        gsap.utils.toArray('.gs-reveal-up').forEach(function(elem) {
+            gsap.fromTo(elem, { y: 100, opacity: 0 }, {
+                y: 0, opacity: 1, duration: 1.2, ease: 'expo.out',
+                scrollTrigger: {
+                    trigger: elem,
+                    start: "top 85%",
+                }
+            });
+        });
+
+        gsap.utils.toArray('.gs-reveal-right').forEach(function(elem) {
+            gsap.fromTo(elem, { x: 50, opacity: 0 }, {
+                x: 0, opacity: 1, duration: 1, ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: elem,
+                    start: "top 80%",
+                }
+            });
+        });
+
+        // Bento Grid Stagger
+        gsap.from('.bento-card', {
+            scrollTrigger: {
+                trigger: '.services',
+                start: 'top 70%'
+            },
+            y: 100,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.2,
+            ease: 'expo.out'
+        });
+
+        // 4. Magnetic Button Logic
+        const magneticBtns = document.querySelectorAll('.magnetic-btn');
+        magneticBtns.forEach(btn => {
+            btn.addEventListener('mousemove', function(e) {
+                const position = btn.getBoundingClientRect();
+                const x = e.pageX - position.left - position.width / 2;
+                const y = e.pageY - position.top - position.height / 2;
+                
+                gsap.to(btn, {
+                    x: x * 0.3,
+                    y: y * 0.3,
+                    duration: 0.5,
+                    ease: "power3.out"
+                });
+            });
+            
+            btn.addEventListener('mouseleave', function() {
+                gsap.to(btn, {
+                    x: 0,
+                    y: 0,
+                    duration: 0.5,
+                    ease: "elastic.out(1, 0.3)"
+                });
             });
         });
     </script>
